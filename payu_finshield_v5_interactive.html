@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>PayU Finshield v5.0 | Universal Anti-Laundering &amp; Liquidity Guard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .pulse-dot { animation: pulse-slow 1.8s infinite; }
+  .stripes {
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.28) 0, rgba(0,0,0,0.28) 8px, transparent 8px, transparent 16px);
+    background-size: 32px 32px;
+    animation: stripe 1.2s linear infinite;
+  }
+  @keyframes stripe { to { background-position: 32px 0; } }
+  @keyframes rowin { from { background: rgba(56, 189, 248, 0.25); } to { background: transparent; } }
+  .rowin { animation: rowin 1.2s ease-out; }
+  @keyframes rowin-green { 0% { background: rgba(16, 185, 129, 0.45); transform: scale(1.005); } 100% { background: rgba(16, 185, 129, 0.08); transform: scale(1); } }
+  @keyframes rowin-red { 0% { background: rgba(244, 63, 94, 0.45); transform: scale(1.005); } 100% { background: rgba(244, 63, 94, 0.10); transform: scale(1); } }
+  .rowin-user-green { animation: rowin-green 1.4s ease-out forwards; border-left: 3px solid #34d399; }
+  .rowin-user-red { animation: rowin-red 1.4s ease-out forwards; border-left: 3px solid #f43f5e; }
+  @keyframes box-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } 50% { box-shadow: 0 0 22px 4px rgba(52, 211, 153, 0.45); } }
+  @keyframes box-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); } 50% { box-shadow: 0 0 22px 4px rgba(244, 63, 94, 0.5); } }
+  .pulse-box-green { animation: box-pulse-green 0.9s ease-out; }
+  .pulse-box-red { animation: box-pulse-red 0.9s ease-out; }
+</style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen p-4 md:p-6 font-sans antialiased">
+
+  <div class="max-w-7xl mx-auto space-y-4">
+    <!-- Header -->
+    <header class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+          <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold text-white">PayU <span class="text-emerald-400">Finshield</span> | Merchant Risk &amp; Liquidity Console</h1>
+            <span class="text-[10px] bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30 font-mono">v5.0 Universal Anti-Laundering Spec</span>
+          </div>
+          <p class="text-sm text-slate-400">365-Day Defense Across Sportsbooks, 24/7 Crash APKs &amp; Offshore Casinos · Dual-Rail Telemetry &amp; Dynamic EMA Guard</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 text-sm font-medium text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-3 py-1.5">
+        <span class="relative flex w-2.5 h-2.5">
+          <span class="animate-ping absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        </span>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
+        </svg>
+        RAILS: INGESTION ONLINE (T+0 ESCROW)
+      </div>
+    </header>
+
+    <!-- Meta Banner (6 Columns) -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-slate-800 border border-slate-800 rounded-xl overflow-hidden text-sm">
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">Business</div><div class="font-semibold text-slate-100 text-xs truncate">The Daily Crumb Bakery</div></div>
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">GSTN</div><div class="font-semibold text-slate-100 text-xs font-mono">29AABCU9603R1ZM</div></div>
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">Registered MCC</div><div class="font-semibold text-slate-100 text-xs">5462 (Bakeries)</div></div>
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">Domain</div><div class="font-semibold text-slate-100 text-xs font-mono">dailycrumb.in</div></div>
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">Settlement A/C</div><div class="font-semibold text-slate-100 text-xs font-mono">HDFC (*4091)</div></div>
+      <div class="bg-slate-900 px-4 py-3"><div class="text-slate-500 text-xs">Dynamic Baseline</div><div class="font-semibold text-emerald-400 text-xs font-mono">30D EMA ± 2σ</div></div>
+    </section>
+
+    <!-- 3 Scenario Toggles -->
+    <section class="grid md:grid-cols-3 gap-3">
+      <button onclick="setScenario('normal')" id="btn-normal" class="text-left rounded-xl border-2 p-4 transition focus:outline-none border-emerald-500/50 bg-emerald-500/10">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-emerald-400" id="icon-normal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/>
+          </svg>
+          <div>
+            <div class="font-bold text-white text-sm" id="title-normal">1. Baseline Day</div>
+            <div class="text-xs text-slate-400">Regular weekday operations</div>
+          </div>
+        </div>
+      </button>
+
+      <button onclick="setScenario('attack')" id="btn-attack" class="text-left rounded-xl border-2 p-4 transition focus:outline-none border-slate-800 bg-slate-900 hover:border-slate-600">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-slate-500" id="icon-attack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+          <div>
+            <div class="font-bold text-slate-300 text-sm" id="title-attack">2. Live Syndicate Attack (Sports / Casino / APK)</div>
+            <div class="text-xs text-slate-400">Sportsbooks, 24/7 Crash APKs (Aviator) &amp; Offshore Casinos</div>
+          </div>
+        </div>
+      </button>
+
+      <button onclick="setScenario('festive')" id="btn-festive" class="text-left rounded-xl border-2 p-4 transition focus:outline-none border-slate-800 bg-slate-900 hover:border-slate-600">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-slate-500" id="icon-festive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+          </svg>
+          <div>
+            <div class="font-bold text-slate-300 text-sm" id="title-festive">3. Festive Spike (Safe)</div>
+            <div class="text-xs text-slate-400">Zero false positives for real businesses</div>
+          </div>
+        </div>
+      </button>
+    </section>
+
+    
+    <!-- View Navigation Tab Switcher -->
+    <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 pt-1 gap-3">
+      <div class="flex items-center gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+        <button onclick="switchTab('console')" id="tab-btn-console" class="flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition bg-slate-800 text-white shadow border border-slate-700">
+          <svg class="w-4 h-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+          </svg>
+          Tab 1: Live Operational Console
+        </button>
+        <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg transition text-slate-400 hover:text-white">
+          <svg class="w-4 h-4 text-sky-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+          </svg>
+          Tab 2: Forensic Graph Analytics &amp; ML Models
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
+        <span class="inline-flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 pulse-dot"></span>
+          <span>Dual-Engine Telemetry: LIVE</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- View 1: Live Operational Console -->
+    <div id="view-console" class="space-y-4">
+<!-- 6 Diagnostic KPI Cards Grid (Exact matching layout & circular gauge) -->
+    <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+      
+      <!-- Card 1: Circular SVG Risk Score -->
+      <div class="rounded-xl border border-emerald-500/50 bg-slate-900 p-4 flex items-center gap-4" id="card-risk">
+        <svg viewBox="0 0 100 100" class="w-24 h-24 shrink-0 -rotate-90">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" stroke-width="10"/>
+          <circle id="gauge-circle" cx="50" cy="50" r="42" fill="none" stroke="#34d399" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="232.22" style="transition: stroke-dashoffset 0.8s ease, stroke 0.4s;"/>
+        </svg>
+        <div>
+          <div class="text-sm text-slate-400">Dynamic Risk Score</div>
+          <div class="text-4xl font-black text-emerald-400" id="risk-score">12<span class="text-lg text-slate-500 font-normal"> / 100</span></div>
+          <div class="text-sm font-semibold text-emerald-400" id="risk-band">Low Risk: Normal Operations</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Cryptographic Origin Check -->
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-4 flex flex-col justify-between" id="card-origin">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/>
+          </svg>
+          Cryptographic Origin Check
+        </div>
+        <div class="my-2">
+          <span id="origin-badge" class="inline-block text-[11px] font-mono font-bold px-2 py-1 rounded border bg-emerald-500/10 text-emerald-400 border-emerald-500/30">
+            <span id="origin-icon">✔</span> <span id="origin-text">HMAC Valid: dailycrumb.in</span>
+          </span>
+          <p class="mt-2 text-xs text-slate-400" id="origin-note">Server-to-server checkout session token authentic.</p>
+        </div>
+        <span class="text-[10px] text-slate-500 font-mono">Bypasses Null Referrer Spoofing</span>
+      </div>
+
+      <!-- Card 3: Spatial Shannon Entropy -->
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-4 flex flex-col justify-between">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>
+          </svg>
+          Spatial Shannon Entropy
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black font-mono text-emerald-400" id="entropy-val">H = 0.19</div>
+          <div class="text-xs text-slate-300" id="entropy-note">91% Local Cluster (Indiranagar / BLR)</div>
+          <div class="mt-2 flex h-2.5 rounded-full overflow-hidden gap-px" id="entropy-bars">
+            <div style="width: 91%; background: #34d399;"></div>
+            <div style="width: 3%; background: #38bdf8;"></div>
+            <div style="width: 3%; background: #a78bfa;"></div>
+            <div style="width: 3%; background: #fbbf24;"></div>
+          </div>
+        </div>
+        <span class="text-[10px] text-slate-500 font-mono">Formula: H = -Σ p(x) log₂ p(x)</span>
+      </div>
+
+      <!-- Card 4: UPI Payer Novelty Ratio -->
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-4 flex flex-col justify-between">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
+          </svg>
+          UPI Payer Novelty Ratio
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black font-mono text-emerald-400" id="vpa-val">14% Novel</div>
+          <div class="text-xs text-slate-300" id="vpa-note">86% Repeat local neighborhood accounts</div>
+          <div class="mt-2 flex h-2.5 rounded-full overflow-hidden bg-slate-800">
+            <div id="vpa-bar" class="bg-emerald-400 transition-all duration-500" style="width: 14%;"></div>
+          </div>
+        </div>
+        <span class="text-[10px] text-slate-500 font-mono">Syndicates Draw 95%+ Novel VPAs</span>
+      </div>
+
+      <!-- Card 5 (NEW): Payout Fan-Out Rail -->
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-4 flex flex-col justify-between" id="card-fanout">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>
+          </svg>
+          Payout Fan-Out Rail
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black font-mono text-emerald-400" id="fanout-val">1 : 2</div>
+          <div class="text-xs text-slate-300" id="fanout-note">2 Verified B2B Suppliers</div>
+          <div class="mt-2 flex h-2.5 rounded-full overflow-hidden bg-slate-800">
+            <div id="fanout-bar" class="bg-emerald-400 transition-all duration-500" style="width: 10%;"></div>
+          </div>
+        </div>
+        <span class="text-[10px] text-slate-500 font-mono">Follow-The-Money Outflow</span>
+      </div>
+
+      <!-- Card 6 (NEW): Dispute / RRN Velocity -->
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-4 flex flex-col justify-between" id="card-dispute">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+          </svg>
+          Dispute / RRN Velocity
+        </div>
+        <div class="my-2">
+          <div class="text-3xl font-black font-mono text-emerald-400" id="dispute-val">0.03%</div>
+          <div class="text-xs text-slate-300" id="dispute-note">Well below NPCI 1.0% Cap</div>
+          <div class="mt-2 flex h-2.5 rounded-full overflow-hidden bg-slate-800">
+            <div id="dispute-bar" class="bg-emerald-400 transition-all duration-500" style="width: 5%;"></div>
+          </div>
+        </div>
+        <span class="text-[10px] text-slate-500 font-mono">NPCI 1.0% Threshold</span>
+      </div>
+
+    </section>
+
+    <!-- Dynamic EMA Rolling Reserve & Statutory Reconciliation -->
+    <section class="rounded-2xl border border-slate-700 bg-slate-900 p-5 space-y-5">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>
+            </svg>
+            Dynamic EMA Rolling Reserve &amp; Statutory Reconciliation
+          </h2>
+          <p class="text-sm text-slate-400">Zero merchant disruption: Base settled on T+1 via 30D Rolling EMA ± 2σ (₹25k protected); surge held in automated escrow.</p>
+        </div>
+        <div class="text-right">
+          <div class="text-sm text-slate-400">Window Inflow Volume</div>
+          <div class="text-4xl font-black text-white font-mono" id="total-vol">₹25,000</div>
+        </div>
+      </div>
+
+      <!-- Split Progress Bar -->
+      <div class="flex h-12 rounded-lg overflow-hidden border border-slate-700 bg-slate-800">
+        <div id="bar-base" class="bg-emerald-500 flex items-center justify-center text-xs font-bold text-slate-950 transition-all duration-700" style="width: 100%;">₹25,000</div>
+        <div id="bar-surge" class="stripes flex items-center justify-center text-xs font-bold text-white transition-all duration-700" style="width: 0%; background-color: #f59e0b;">₹0</div>
+      </div>
+
+      <!-- Tracks Breakdown -->
+      <div class="grid md:grid-cols-2 gap-3 text-sm">
+        <div id="track-a-box" class="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-3 transition-all duration-300">
+          <div id="track-a-title" class="font-bold text-emerald-300">Track A: Base Working Capital (T+1 Cleared via EMA ± 2σ) ₹25,000</div>
+          <div class="text-slate-300 flex items-center gap-1 mt-0.5">
+            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>
+            </svg>
+            Released to Bank on T+1. Guarantees the bakery staff &amp; flour bills are paid.
+          </div>
+        </div>
+
+        <div id="track-b-box" class="rounded-lg border p-3 border-slate-700 bg-slate-800/50">
+          <div id="track-b-title" class="font-bold text-slate-400">Track B: Surge Liquidity Escrow (48h Quarantine) ₹0</div>
+          <div id="track-b-desc" class="text-slate-300 flex items-center gap-1 mt-0.5">
+            No surge volume. Nothing to hold.
+          </div>
+        </div>
+      </div>
+
+      <!-- GSTN IRN Automated Reconciler Box -->
+      <div class="rounded-xl border border-slate-800 bg-slate-950/60 p-4 grid lg:grid-cols-2 gap-4">
+        <div class="flex items-start gap-3">
+          <div class="p-2.5 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs font-bold text-slate-200">GSTN Invoice Reference Number (IRN) Automated Reconciler</span>
+              <span id="gstn-badge" class="bg-slate-800 text-slate-400 text-[10px] font-mono px-2 py-0.5 rounded">STANDBY</span>
+            </div>
+            <p id="gstn-note" class="text-xs text-slate-400 mt-1">Volume within normal range. No statutory audit friction applied.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center gap-3">
+          <button onclick="triggerGSTNMatch()" id="btn-gstn-action" disabled class="flex items-center justify-center gap-2 rounded-lg bg-slate-800 text-slate-500 font-bold py-3 px-4 transition border border-slate-700 cursor-not-allowed">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+            </svg>
+            <span id="btn-gstn-label">Run Real-Time GSTN Match</span>
+          </button>
+
+          <!-- Success Box -->
+          <div id="gstn-success-box" class="hidden rounded-lg border border-emerald-500/50 bg-emerald-500/10 p-3 text-xs font-mono text-emerald-300 flex gap-2">
+            <svg class="w-4 h-4 shrink-0 mt-0.5 text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>
+            </svg>
+            <span><strong>GSTN E-WAY MATCH SUCCESS:</strong> Validated ₹1.25L Dairy/Flour Purchase (IRN: 8a42...9f). ₹1,60,000 Escrow Released to Bakery Bank A/C!</span>
+          </div>
+
+          <!-- Failure with RBI Compliance Box -->
+          <div id="gstn-fail-box" class="hidden rounded-lg border border-rose-500/50 bg-rose-500/10 p-3 text-xs font-mono text-rose-300 flex gap-2">
+            <svg class="w-4 h-4 shrink-0 mt-0.5 text-rose-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+            </svg>
+            <span><strong>GSTN AUDIT FAILED &amp; RBI COMPLIANCE SLA ESCALATION:</strong> B2B Input Invoices Total ₹0 for turnover of ₹4.25L. 1:214 payout dispersal detected. Case #FIN-8942-RG auto-routed to Senior Risk Desk (24h SLA). Level-2 Storefront Video KYC dispatched to merchant.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Customer & Syndicate Checkout Simulator (Human-in-the-Loop Sandbox) -->
+    <section id="interactive-sandbox" class="rounded-2xl border-2 border-sky-500/40 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 p-5 space-y-4 shadow-lg">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-sky-500/15 border border-sky-500/40 text-sky-400">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h2 class="text-base font-bold text-white">Live Customer &amp; Syndicate Checkout Simulator (Interactive Sandbox)</h2>
+              <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] font-mono px-2 py-0.5 rounded font-bold">HUMAN-IN-THE-LOOP TESTER</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Test how the same <span class="text-slate-200 font-mono">The Daily Crumb Bakery</span> gateway routes a genuine ₹500 pastry order vs. a masked ₹1,500 bet in real time.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="stream-status-pill" class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Stream: AUTO</span>
+          <button onclick="resetSandboxCounters()" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition cursor-pointer">
+            ↺ Reset Counters
+          </button>
+        </div>
+      </div>
+
+      <!-- Two Primary 1-Click Action Buttons (₹500 Bakery vs ₹1,500 Masked Bet) -->
+      <div class="grid md:grid-cols-2 gap-4">
+        
+        <!-- Action 1: Genuine ₹500 Bakery Order -->
+        <button onclick="simulateUserCheckout('genuine', 500, 'Browser / dailycrumb.in', 'KA (BLR) - @okhdfcbank', 'UPI Intent (GPay)')" class="group text-left rounded-xl border-2 border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20 hover:border-emerald-400 p-4 transition-all duration-200 cursor-pointer focus:outline-none">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+                🥖
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-black text-white text-base">Pay ₹500 — Genuine Bakery Order</span>
+                  <span class="bg-emerald-500 text-slate-950 text-[10px] font-mono font-bold px-2 py-0.5 rounded">1-CLICK PAY</span>
+                </div>
+                <div class="text-xs text-emerald-300 font-mono mt-0.5">Origin: dailycrumb.in (HMAC Signed ✔) · Local BLR Payer</div>
+              </div>
+            </div>
+            <div class="text-right font-mono shrink-0">
+              <span class="text-xs text-slate-400 block">Route</span>
+              <span class="text-xs font-bold text-emerald-400">Track A (T+1)</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-emerald-500/20 flex items-center justify-between text-[11px] text-slate-300">
+            <span>Sourdough &amp; Coffee · Indiranagar Pincode Cluster</span>
+            <span class="font-mono text-emerald-300 font-bold group-hover:translate-x-1 transition">Inject ₹500 Order →</span>
+          </div>
+        </button>
+
+        <!-- Action 2: Masked ₹1,500 Syndicate Bet -->
+        <button onclick="simulateUserCheckout('bet', 1500, 'aviator99.club (Crash APK)', 'RJ (Jaipur) - @ybl', 'UPI Dynamic Intent')" class="group text-left rounded-xl border-2 border-rose-500/50 bg-rose-500/10 hover:bg-rose-500/20 hover:border-rose-400 p-4 transition-all duration-200 cursor-pointer focus:outline-none">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+                🎰
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-black text-white text-base">Bet ₹1,500 — Masked via Bakery QR</span>
+                  <span class="bg-rose-500 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded">1-CLICK BET</span>
+                </div>
+                <div class="text-xs text-rose-300 font-mono mt-0.5">Origin: aviator99.club APK (No HMAC ⚠) · Out-of-State VPA</div>
+              </div>
+            </div>
+            <div class="text-right font-mono shrink-0">
+              <span class="text-xs text-slate-400 block">Route</span>
+              <span class="text-xs font-bold text-rose-400">Track B Escrow</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-rose-500/20 flex items-center justify-between text-[11px] text-slate-300">
+            <span>24/7 Crash APK / Sportsbook Bet · Funneled via Bakery MID</span>
+            <span class="font-mono text-rose-300 font-bold group-hover:translate-x-1 transition">Inject ₹1,500 Bet →</span>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Live 3-Stage Decision Pipeline Trace + Custom Input Bar -->
+      <div class="grid lg:grid-cols-12 gap-3 items-center bg-slate-950/90 border border-slate-800 rounded-xl p-3">
+        
+        <!-- Live Pipeline Trace (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-1.5" id="pipeline-trace-box">
+          <div class="flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-400 uppercase tracking-wider font-bold">Real-Time Finshield Interception Trace:</span>
+            <span id="trace-latency" class="text-sky-400">Sync Handshake: 11.2ms</span>
+          </div>
+          <div id="trace-steps" class="text-xs font-mono text-slate-300 bg-slate-900/90 border border-slate-800 rounded-lg px-3 py-2 flex flex-wrap items-center gap-2">
+            <span class="text-slate-400">Click <strong class="text-emerald-400">Pay ₹500</strong> or <strong class="text-rose-400">Bet ₹1,500</strong> above to trace live packet inspection &amp; liquidity forking...</span>
+          </div>
+        </div>
+
+        <!-- Custom Amount & Channel Injector (5 cols) -->
+        <div class="lg:col-span-5 flex flex-wrap sm:flex-nowrap items-center gap-2 border-t lg:border-t-0 lg:border-l border-slate-800 pt-2 lg:pt-0 lg:pl-3">
+          <div class="relative w-28 shrink-0">
+            <span class="absolute left-2.5 top-2 text-xs font-mono text-slate-400">₹</span>
+            <input type="number" id="custom-amt-input" value="2500" min="50" max="500000" step="100" class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-6 pr-2 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-sky-500" title="Custom Amount (INR)">
+          </div>
+          <select id="custom-channel-select" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-sky-500">
+            <option value="bet_apk">🎰 Crash APK (aviator99.club)</option>
+            <option value="bet_tg">🏏 Telegram Bot (t.me/bet_bot)</option>
+            <option value="bet_casino">🎲 Casino WebView (royalroulette.io)</option>
+            <option value="genuine_web">🥖 Bakery Web (dailycrumb.in ✔)</option>
+          </select>
+          <button onclick="triggerCustomCheckout()" class="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs font-mono shrink-0 transition cursor-pointer">
+            ⚡ Inject
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Real-Time Ingestion Logs Table -->
+    <section class="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+        <span class="font-bold text-white flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>
+          </svg>
+          Real-Time Ingestion Logs (Checkout SDK Telemetry Stream) <span class="text-xs font-normal text-slate-500">(last 6)</span>
+        </span>
+        <span class="text-[11px] font-mono text-slate-400">Live Webview &amp; Referrer Inspection</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="text-slate-400 text-left bg-slate-950/50">
+            <tr>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Time</th>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Amount</th>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Rail / Method</th>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Payer VPA Handle &amp; State</th>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Runtime Container / Origin</th>
+              <th class="px-4 py-2 font-medium whitespace-nowrap">Decision</th>
+            </tr>
+          </thead>
+          <tbody id="txn-tbody">
+            <!-- Dynamic Telemetry Rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+
+    <!-- View 2: Forensic Graph Analytics & ML Models (4 High-Impact Visual SVG Charts) -->
+    <div id="view-analytics" class="hidden space-y-4">
+
+      <!-- Summary Banner for Analytics -->
+      <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-sky-500/10 border border-sky-500/30 text-sky-400 shrink-0">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">Forensic Risk Modeling &amp; Algorithmic Verification Deck</h3>
+            <p class="text-xs text-slate-400">Mathematical explainability across Statistical Envelopes, Payout Dispersals, Spatial Entropy, and Regulatory Dispute Caps.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-400">Active Scenario:</span>
+          <span id="analytics-active-scenario-tag" class="px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">1. Baseline Day</span>
+        </div>
+      </div>
+
+      <!-- 2x2 Grid of 4 High-Impact Graphs -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+        <!-- Graph 1: 30-Day Rolling EMA Anomaly Envelope -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+          <div class="flex items-start justify-between pb-3 border-b border-slate-800 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Model 1: 30-Day Rolling EMA Anomaly Envelope</h4>
+                <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-mono px-2 py-0.5 rounded font-bold">STATISTICAL MOAT</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Protects daily base volume (EMA ± 2σ); holds statistical surge in 48-Hour Escrow.</p>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400 shrink-0">
+              Upper Limit: <strong class="text-amber-400 font-bold">₹28,500 (+2σ)</strong>
+            </div>
+          </div>
+
+          <div class="py-3" id="svg-chart-1">
+            <!-- Dynamic SVG Chart 1 -->
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-800 text-[11px] font-mono">
+            <div><span class="text-slate-500 block">30D Base EMA</span><span class="text-slate-200 font-bold">₹24,850</span></div>
+            <div><span class="text-slate-500 block">+2σ Bound</span><span class="text-amber-400 font-bold">₹28,500</span></div>
+            <div><span class="text-slate-500 block">Day 30 Volume</span><span id="g1-val-d30" class="text-white font-bold">₹25,000</span></div>
+            <div><span class="text-slate-500 block">Escrow Status</span><span id="g1-val-escrow" class="text-emerald-400 font-bold">₹0 (100% Cleared)</span></div>
+          </div>
+        </div>
+
+        <!-- Graph 2: Dual-Rail Inflow vs. Payout Dispersal Velocity -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+          <div class="flex items-start justify-between pb-3 border-b border-slate-800 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Model 2: Payout Rail Fan-Out Dispersal Velocity</h4>
+                <span class="bg-sky-500/20 text-sky-300 text-[10px] font-mono px-2 py-0.5 rounded font-bold">FOLLOW-THE-MONEY</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Inflow GMV (Blue) vs Outbound Payout Beneficiary Fan-Out (Sky/Red).</p>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400 shrink-0">
+              Dispersal Ratio: <strong id="g2-val-ratio" class="text-emerald-400 font-bold">1 : 2</strong>
+            </div>
+          </div>
+
+          <div class="py-3" id="svg-chart-2">
+            <!-- Dynamic SVG Chart 2 -->
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-800 text-[11px] font-mono">
+            <div><span class="text-slate-500 block">Inflow GMV</span><span id="g2-val-inflow" class="text-sky-400 font-bold">₹25,000</span></div>
+            <div><span class="text-slate-500 block">Outbound Payouts</span><span id="g2-val-outflow" class="text-slate-300 font-bold">2 Beneficiaries</span></div>
+            <div><span class="text-slate-500 block">Fan-Out Ratio</span><span id="g2-val-fanout" class="text-emerald-400 font-bold">1 : 2</span></div>
+            <div><span class="text-slate-500 block">Payout Circuit</span><span id="g2-val-circuit" class="text-emerald-400 font-bold">ACTIVE (Clean)</span></div>
+          </div>
+        </div>
+
+        <!-- Graph 3: Spatial Shannon Entropy Regional Histogram -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+          <div class="flex items-start justify-between pb-3 border-b border-slate-800 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Model 3: Spatial Shannon Entropy 19-State Spread</h4>
+                <span class="bg-purple-500/20 text-purple-300 text-[10px] font-mono px-2 py-0.5 rounded font-bold">H-INDEX METRIC</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Formula: H = -Σ p(x) log₂ p(x). Clustered (H &lt; 0.35) vs Uniform (H → 1.0).</p>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400 shrink-0">
+              Entropy: <strong id="g3-val-h" class="text-emerald-400 font-bold">H = 0.19</strong>
+            </div>
+          </div>
+
+          <div class="py-3" id="svg-chart-3">
+            <!-- Dynamic SVG Chart 3 -->
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-800 text-[11px] font-mono">
+            <div><span class="text-slate-500 block">Karnataka (Local)</span><span id="g3-val-local" class="text-emerald-400 font-bold">91.0%</span></div>
+            <div><span class="text-slate-500 block">Other 18 States</span><span id="g3-val-other" class="text-slate-300 font-bold">9.0%</span></div>
+            <div><span class="text-slate-500 block">Footfall Topology</span><span id="g3-val-topology" class="text-emerald-400 font-bold">Local Cluster</span></div>
+            <div><span class="text-slate-500 block">Mule Tunneling</span><span id="g3-val-tunneling" class="text-emerald-400 font-bold">None</span></div>
+          </div>
+        </div>
+
+        <!-- Graph 4: Dispute & Chargeback Velocity vs NPCI 1.0% Cap -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+          <div class="flex items-start justify-between pb-3 border-b border-slate-800 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Model 4: Chargeback &amp; Dispute Velocity vs NPCI Cap</h4>
+                <span class="bg-rose-500/20 text-rose-300 text-[10px] font-mono px-2 py-0.5 rounded font-bold">NPCI 1.0% CEILING</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Trajectory of friendly-fraud dispute filings when losing bettors claim non-delivery.</p>
+            </div>
+            <div class="text-right font-mono text-xs text-slate-400 shrink-0">
+              Current Peak: <strong id="g4-val-peak" class="text-emerald-400 font-bold">0.03% (Safe)</strong>
+            </div>
+          </div>
+
+          <div class="py-3" id="svg-chart-4">
+            <!-- Dynamic SVG Chart 4 -->
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-800 text-[11px] font-mono">
+            <div><span class="text-slate-500 block">Dispute Velocity</span><span id="g4-val-velocity" class="text-emerald-400 font-bold">0.03%</span></div>
+            <div><span class="text-slate-500 block">NPCI Threshold</span><span class="text-rose-400 font-bold">1.00%</span></div>
+            <div><span class="text-slate-500 block">Regulatory Compliance</span><span id="g4-val-status" class="text-emerald-400 font-bold">COMPLIANT</span></div>
+            <div><span class="text-slate-500 block">PayU Fine Risk</span><span id="g4-val-fine" class="text-emerald-400 font-bold">Zero Risk</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const C_GREEN = "bg-emerald-500/20 text-emerald-300";
+    const C_RED = "bg-rose-500/20 text-rose-300";
+    const C_AMBER = "bg-amber-500/20 text-amber-300";
+
+    const makeTxn = (t, amt, rail, vpa, origin, act, badge) => ({
+      id: Math.random(), t, amt, rail, vpa, origin, act, badge
+    });
+
+    
+    let currentTab = 'console';
+
+    function switchTab(tab) {
+      currentTab = tab;
+      const btnConsole = document.getElementById('tab-btn-console');
+      const btnAnalytics = document.getElementById('tab-btn-analytics');
+      const viewConsole = document.getElementById('view-console');
+      const viewAnalytics = document.getElementById('view-analytics');
+
+      if (tab === 'console') {
+        btnConsole.className = "flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition bg-slate-800 text-white shadow border border-slate-700";
+        btnAnalytics.className = "flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg transition text-slate-400 hover:text-white";
+        viewConsole.classList.remove('hidden');
+        viewAnalytics.classList.add('hidden');
+      } else {
+        btnAnalytics.className = "flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition bg-slate-800 text-white shadow border border-slate-700";
+        btnConsole.className = "flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg transition text-slate-400 hover:text-white";
+        viewConsole.classList.add('hidden');
+        viewAnalytics.classList.remove('hidden');
+        renderAnalyticsCharts(current);
+      }
+    }
+
+    function renderAnalyticsCharts(sc) {
+      // 1. Update tag
+      const tag = document.getElementById('analytics-active-scenario-tag');
+      if (sc === 'normal') {
+        tag.className = "px-2.5 py-1 rounded-lg font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+        tag.innerText = "1. Baseline Day";
+      } else if (sc === 'attack') {
+        tag.className = "px-2.5 py-1 rounded-lg font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30";
+        tag.innerText = "2. Live Syndicate Attack (Sports / Casino / APK)";
+      } else {
+        tag.className = "px-2.5 py-1 rounded-lg font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        tag.innerText = "3. Festive Spike (Safe)";
+      }
+
+      // CHART 1: 30D Rolling EMA Anomaly Band
+      const c1 = document.getElementById('svg-chart-1');
+      if (sc === 'normal') {
+        document.getElementById('g1-val-d30').innerText = "₹25,000";
+        document.getElementById('g1-val-escrow').innerText = "₹0 (100% Cleared)";
+        document.getElementById('g1-val-escrow').className = "text-emerald-400 font-bold";
+
+        c1.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <defs>
+              <linearGradient id="gradNormal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#34d399" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#34d399" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid Lines -->
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="75" x2="500" y2="75" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="120" x2="500" y2="120" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <!-- Y-labels -->
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="79" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="124" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹100k</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <!-- +2σ Boundary Line (at ~28.5k => y=156) -->
+            <line x1="40" y1="156" x2="500" y2="156" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="495" y="152" fill="#fbbf24" font-size="9" text-anchor="end" font-family="monospace">+2σ Limit: ₹28,500</text>
+            <!-- Normal 30D Envelope Path -->
+            <path d="M 40 159 Q 150 157, 260 160 T 450 158 L 490 157.5" fill="none" stroke="#34d399" stroke-width="2.5"/>
+            <!-- Shaded Area Below -->
+            <path d="M 40 159 Q 150 157, 260 160 T 450 158 L 490 157.5 L 490 165 L 40 165 Z" fill="url(#gradNormal)"/>
+            <!-- Day 30 Point -->
+            <circle cx="490" cy="157.5" r="5" fill="#34d399"/>
+            <text x="480" y="145" fill="#34d399" font-size="10" font-weight="bold" font-family="monospace">Day 30: ₹25,000 (Safe)</text>
+            <!-- X Axis Labels -->
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 1</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 10</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 18</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 25</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 30</text>
+          </svg>
+        `;
+      } else if (sc === 'attack') {
+        document.getElementById('g1-val-d30').innerText = "₹4,25,000";
+        document.getElementById('g1-val-escrow').innerText = "₹4,00,000 (Locked)";
+        document.getElementById('g1-val-escrow').className = "text-rose-400 font-bold";
+
+        c1.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <defs>
+              <linearGradient id="gradAttack" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid Lines -->
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="75" x2="500" y2="75" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="120" x2="500" y2="120" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <!-- Y-labels -->
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="79" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="124" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹100k</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <!-- +2σ Boundary Line -->
+            <line x1="40" y1="156" x2="500" y2="156" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="340" y="152" fill="#fbbf24" font-size="9" font-family="monospace">+2σ Limit: ₹28,500</text>
+            <!-- Escrow Quarantine Zone Shading -->
+            <polygon points="450,157.5 490,26 490,156 450,156" fill="url(#gradAttack)"/>
+            <!-- Path with massive Day 30 spike -->
+            <path d="M 40 159 Q 150 157, 260 160 T 450 157.5 L 490 26" fill="none" stroke="#f43f5e" stroke-width="3"/>
+            <!-- Pulsing Circle on Peak -->
+            <circle cx="490" cy="26" r="6" fill="#f43f5e"/>
+            <circle cx="490" cy="26" r="11" fill="none" stroke="#f43f5e" opacity="0.6"/>
+            <!-- Annotations -->
+            <text x="480" y="22" fill="#f43f5e" font-size="10" font-weight="bold" text-anchor="end" font-family="monospace">Syndicate Spike: ₹4,25,000</text>
+            <rect x="350" y="80" width="140" height="24" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+            <text x="420" y="96" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="middle" font-family="monospace">₹4.0L Locked in Escrow</text>
+            <!-- X Axis -->
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 1</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 10</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 18</text>
+            <text x="450" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 29</text>
+            <text x="490" y="182" fill="#f43f5e" font-size="9" font-weight="bold" font-family="monospace">Day 30</text>
+          </svg>
+        `;
+      } else {
+        document.getElementById('g1-val-d30').innerText = "₹1,85,000";
+        document.getElementById('g1-val-escrow').innerText = "₹1,60,000 (Clearable)";
+        document.getElementById('g1-val-escrow').className = "text-amber-400 font-bold";
+
+        c1.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <defs>
+              <linearGradient id="gradFestive" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="75" x2="500" y2="75" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="120" x2="500" y2="120" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="79" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="124" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹100k</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <line x1="40" y1="156" x2="500" y2="156" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="300" y="152" fill="#fbbf24" font-size="9" font-family="monospace">+2σ Limit: ₹28,500</text>
+            <!-- Smooth climb over festive week -->
+            <path d="M 40 159 Q 150 157, 260 160 T 370 150 Q 430 110, 490 92" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+            <path d="M 40 159 Q 150 157, 260 160 T 370 150 Q 430 110, 490 92 L 490 165 L 40 165 Z" fill="url(#gradFestive)"/>
+            <circle cx="490" cy="92" r="5" fill="#fbbf24"/>
+            <text x="480" y="80" fill="#fbbf24" font-size="10" font-weight="bold" font-family="monospace">Festive: ₹1,85,000</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 1</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 10</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 18</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 25</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">Day 30</text>
+          </svg>
+        `;
+      }
+
+      // CHART 2: Payout Rail Fan-Out Velocity
+      const c2 = document.getElementById('svg-chart-2');
+      if (sc === 'normal') {
+        document.getElementById('g2-val-inflow').innerText = "₹25,000";
+        document.getElementById('g2-val-outflow').innerText = "2 Beneficiaries";
+        document.getElementById('g2-val-fanout').innerText = "1 : 2";
+        document.getElementById('g2-val-ratio').innerText = "1 : 2 (Normal)";
+        document.getElementById('g2-val-ratio').className = "text-emerald-400 font-bold";
+        document.getElementById('g2-val-circuit').innerText = "ACTIVE (Clean)";
+        document.getElementById('g2-val-circuit').className = "text-emerald-400 font-bold";
+
+        c2.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="95" x2="500" y2="95" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="99" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="168" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <text x="505" y="34" fill="#a855f7" font-size="9" font-family="monospace">200 Tx</text>
+            <text x="505" y="99" fill="#a855f7" font-size="9" font-family="monospace">100 Tx</text>
+            <text x="505" y="168" fill="#a855f7" font-size="9" font-family="monospace">0 Tx</text>
+            <!-- Inflow line (Blue) -->
+            <path d="M 40 162 Q 200 160, 350 158 T 490 155" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <!-- Outflow line (Purple step) -->
+            <path d="M 40 165 L 180 165 L 180 163 L 360 163 L 360 161 L 490 161" fill="none" stroke="#a855f7" stroke-width="2"/>
+            <circle cx="180" cy="163" r="3" fill="#a855f7"/>
+            <circle cx="360" cy="161" r="3" fill="#a855f7"/>
+            <text x="270" y="148" fill="#a855f7" font-size="9" font-family="monospace">2 B2B Dairy/Flour Payouts</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">18:00</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">19:30</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">21:00</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">22:30</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">00:00</text>
+          </svg>
+        `;
+      } else if (sc === 'attack') {
+        document.getElementById('g2-val-inflow').innerText = "₹4,25,000";
+        document.getElementById('g2-val-outflow').innerText = "214 Beneficiaries";
+        document.getElementById('g2-val-fanout').innerText = "1 : 214";
+        document.getElementById('g2-val-ratio').innerText = "1 : 214 (Severe Dispersal)";
+        document.getElementById('g2-val-ratio').className = "text-rose-400 font-bold";
+        document.getElementById('g2-val-circuit').innerText = "FROZEN (T+0 Lock)";
+        document.getElementById('g2-val-circuit').className = "text-rose-400 font-bold";
+
+        c2.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="95" x2="500" y2="95" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="99" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="168" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <text x="505" y="34" fill="#f43f5e" font-size="9" font-family="monospace">200 Tx</text>
+            <text x="505" y="99" fill="#f43f5e" font-size="9" font-family="monospace">100 Tx</text>
+            <text x="505" y="168" fill="#f43f5e" font-size="9" font-family="monospace">0 Tx</text>
+            <!-- Inflow line shoots up (Blue) -->
+            <path d="M 40 162 L 300 160 Q 370 140, 430 40 L 490 32" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <!-- Outflow line shoots up in parallel (Red) -->
+            <path d="M 40 165 L 300 163 Q 370 130, 430 45 L 430 35" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="4 2"/>
+            <!-- Circuit Breaker Marker at 23:45 (x=430) -->
+            <line x1="430" y1="20" x2="430" y2="165" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3 3"/>
+            <rect x="360" y="15" width="135" height="22" rx="4" fill="#0f172a" stroke="#f43f5e" stroke-width="1"/>
+            <text x="427" y="29" fill="#f43f5e" font-size="8.5" font-weight="bold" text-anchor="middle" font-family="monospace">CIRCUIT BREAKER: 214 Payouts</text>
+            <circle cx="430" cy="45" r="5" fill="#f43f5e"/>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">18:00</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">19:30</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">21:00</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">22:30</text>
+            <text x="430" y="182" fill="#f43f5e" font-size="9" font-weight="bold" font-family="monospace">23:45 (Surge)</text>
+          </svg>
+        `;
+      } else {
+        document.getElementById('g2-val-inflow').innerText = "₹1,85,000";
+        document.getElementById('g2-val-outflow').innerText = "4 Beneficiaries";
+        document.getElementById('g2-val-fanout').innerText = "1 : 4";
+        document.getElementById('g2-val-ratio').innerText = "1 : 4 (Valid B2B)";
+        document.getElementById('g2-val-ratio').className = "text-emerald-400 font-bold";
+        document.getElementById('g2-val-circuit').innerText = "ACTIVE (Verified)";
+        document.getElementById('g2-val-circuit').className = "text-emerald-400 font-bold";
+
+        c2.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="95" x2="500" y2="95" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹400k</text>
+            <text x="35" y="99" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹200k</text>
+            <text x="35" y="168" fill="#38bdf8" font-size="9" text-anchor="end" font-family="monospace">₹0</text>
+            <text x="505" y="34" fill="#a855f7" font-size="9" font-family="monospace">20 Tx</text>
+            <text x="505" y="99" fill="#a855f7" font-size="9" font-family="monospace">10 Tx</text>
+            <text x="505" y="168" fill="#a855f7" font-size="9" font-family="monospace">0 Tx</text>
+            <path d="M 40 162 Q 220 150, 350 115 T 490 92" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <path d="M 40 165 L 140 165 L 140 160 L 260 160 L 260 155 L 380 155 L 380 148 L 490 148" fill="none" stroke="#a855f7" stroke-width="2"/>
+            <text x="340" y="140" fill="#a855f7" font-size="9" font-family="monospace">4 Bulk Vendor Settlements</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">18:00</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">19:30</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">21:00</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">22:30</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">00:00</text>
+          </svg>
+        `;
+      }
+
+      // CHART 3: Spatial Shannon Entropy Histogram (12 key states)
+      const c3 = document.getElementById('svg-chart-3');
+      const states = ["KA","MH","DL","UP","RJ","NL","AS","WB","BR","MP","GJ","HR"];
+      if (sc === 'normal') {
+        document.getElementById('g3-val-h').innerText = "H = 0.19";
+        document.getElementById('g3-val-h').className = "text-emerald-400 font-bold";
+        document.getElementById('g3-val-local').innerText = "91.0%";
+        document.getElementById('g3-val-other').innerText = "9.0%";
+        document.getElementById('g3-val-topology').innerText = "Local Cluster";
+        document.getElementById('g3-val-topology').className = "text-emerald-400 font-bold";
+        document.getElementById('g3-val-tunneling').innerText = "None (Clean)";
+        document.getElementById('g3-val-tunneling').className = "text-emerald-400 font-bold";
+
+        const barsNormal = [91, 2.5, 1.8, 1.2, 0.8, 0.4, 0.3, 0.5, 0.4, 0.3, 0.4, 0.4];
+        c3.innerHTML = buildHistogramSVG(states, barsNormal, "#34d399", "91% KA (Indiranagar)", 135);
+      } else if (sc === 'attack') {
+        document.getElementById('g3-val-h').innerText = "H = 0.96";
+        document.getElementById('g3-val-h').className = "text-rose-400 font-bold";
+        document.getElementById('g3-val-local').innerText = "6.2%";
+        document.getElementById('g3-val-other').innerText = "93.8%";
+        document.getElementById('g3-val-topology').innerText = "Uniform Dispersal";
+        document.getElementById('g3-val-topology').className = "text-rose-400 font-bold";
+        document.getElementById('g3-val-tunneling').innerText = "CRITICAL (19 States)";
+        document.getElementById('g3-val-tunneling').className = "text-rose-400 font-bold";
+
+        const barsAttack = [6.2, 7.8, 8.5, 9.1, 8.2, 7.0, 6.8, 7.4, 8.0, 7.2, 6.9, 6.9];
+        c3.innerHTML = buildHistogramSVG(states, barsAttack, "#f43f5e", "High Entropy: ~7% per state (Uniform)", 25);
+      } else {
+        document.getElementById('g3-val-h').innerText = "H = 0.31";
+        document.getElementById('g3-val-h').className = "text-emerald-400 font-bold";
+        document.getElementById('g3-val-local').innerText = "94.0%";
+        document.getElementById('g3-val-other').innerText = "6.0%";
+        document.getElementById('g3-val-topology').innerText = "Metro Cluster";
+        document.getElementById('g3-val-topology').className = "text-emerald-400 font-bold";
+        document.getElementById('g3-val-tunneling').innerText = "None";
+        document.getElementById('g3-val-tunneling').className = "text-emerald-400 font-bold";
+
+        const barsFestive = [94, 1.5, 1.2, 0.8, 0.5, 0.2, 0.2, 0.4, 0.3, 0.3, 0.3, 0.3];
+        c3.innerHTML = buildHistogramSVG(states, barsFestive, "#34d399", "94% KA (Metro Diwali Pre-orders)", 140);
+      }
+
+      // CHART 4: Dispute & Chargeback Velocity vs NPCI Cap
+      const c4 = document.getElementById('svg-chart-4');
+      if (sc === 'normal') {
+        document.getElementById('g4-val-peak').innerText = "0.03% (Safe)";
+        document.getElementById('g4-val-peak').className = "text-emerald-400 font-bold";
+        document.getElementById('g4-val-velocity').innerText = "0.03%";
+        document.getElementById('g4-val-status').innerText = "COMPLIANT";
+        document.getElementById('g4-val-status').className = "text-emerald-400 font-bold";
+        document.getElementById('g4-val-fine').innerText = "Zero Risk";
+        document.getElementById('g4-val-fine').className = "text-emerald-400 font-bold";
+
+        c4.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="80" x2="500" y2="80" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">5.0%</text>
+            <text x="35" y="84" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">3.0%</text>
+            <text x="35" y="134" fill="#f43f5e" font-size="9" text-anchor="end" font-family="monospace">1.0%</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">0.0%</text>
+            <!-- NPCI 1.0% Cap Line (at y=130) -->
+            <line x1="40" y1="130" x2="500" y2="130" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4 3"/>
+            <text x="495" y="125" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="end" font-family="monospace">NPCI 1.00% Regulatory Ceiling</text>
+            <!-- Normal Dispute Line (0.03% => y=164) -->
+            <path d="M 40 164 L 150 163.8 L 260 164 L 370 163.7 L 490 164" fill="none" stroke="#34d399" stroke-width="2.5"/>
+            <circle cx="490" cy="164" r="4" fill="#34d399"/>
+            <text x="480" y="155" fill="#34d399" font-size="9.5" font-weight="bold" font-family="monospace">0.03% (Well Below Cap)</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">+0h</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">+2h</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">+4h</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">+8h</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">+12h</text>
+          </svg>
+        `;
+      } else if (sc === 'attack') {
+        document.getElementById('g4-val-peak').innerText = "4.82% (Breach)";
+        document.getElementById('g4-val-peak').className = "text-rose-400 font-bold";
+        document.getElementById('g4-val-velocity').innerText = "4.82%";
+        document.getElementById('g4-val-status').innerText = "REGULATORY BREACH";
+        document.getElementById('g4-val-status').className = "text-rose-400 font-bold";
+        document.getElementById('g4-val-fine').innerText = "High Penalty";
+        document.getElementById('g4-val-fine').className = "text-rose-400 font-bold";
+
+        c4.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <defs>
+              <linearGradient id="gradDispute" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="80" x2="500" y2="80" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">5.0%</text>
+            <text x="35" y="84" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">3.0%</text>
+            <text x="35" y="134" fill="#f43f5e" font-size="9" text-anchor="end" font-family="monospace">1.0%</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">0.0%</text>
+            <!-- NPCI 1.0% Line -->
+            <line x1="40" y1="130" x2="500" y2="130" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4 3"/>
+            <text x="495" y="125" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="end" font-family="monospace">NPCI 1.00% Cap</text>
+            <!-- Shaded Area of Breach above 1.0% -->
+            <polygon points="215,130 490,35 490,130" fill="url(#gradDispute)"/>
+            <!-- Rapidly Climbing Dispute Line -->
+            <path d="M 40 164 L 140 160 Q 200 145, 260 110 T 380 65 L 490 35" fill="none" stroke="#f43f5e" stroke-width="3"/>
+            <circle cx="490" cy="35" r="5" fill="#f43f5e"/>
+            <circle cx="490" cy="35" r="10" fill="none" stroke="#f43f5e" opacity="0.6"/>
+            <!-- Annotation -->
+            <text x="480" y="28" fill="#f43f5e" font-size="10" font-weight="bold" text-anchor="end" font-family="monospace">Peak: 4.82% (Friendly Fraud Wave)</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">+0h</text>
+            <text x="140" y="182" fill="#64748b" font-size="9" font-family="monospace">+2h</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">+4h</text>
+            <text x="380" y="182" fill="#64748b" font-size="9" font-family="monospace">+8h</text>
+            <text x="490" y="182" fill="#f43f5e" font-size="9" font-weight="bold" font-family="monospace">+12h (Post-Session)</text>
+          </svg>
+        `;
+      } else {
+        document.getElementById('g4-val-peak').innerText = "0.12% (Safe)";
+        document.getElementById('g4-val-peak').className = "text-emerald-400 font-bold";
+        document.getElementById('g4-val-velocity').innerText = "0.12%";
+        document.getElementById('g4-val-status').innerText = "COMPLIANT";
+        document.getElementById('g4-val-status').className = "text-emerald-400 font-bold";
+        document.getElementById('g4-val-fine').innerText = "Zero Risk";
+        document.getElementById('g4-val-fine').className = "text-emerald-400 font-bold";
+
+        c4.innerHTML = `
+          <svg viewBox="0 0 520 200" class="w-full h-48">
+            <line x1="40" y1="30" x2="500" y2="30" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="80" x2="500" y2="80" stroke="#1e293b" stroke-dasharray="2 2"/>
+            <line x1="40" y1="165" x2="500" y2="165" stroke="#334155"/>
+            <text x="35" y="34" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">5.0%</text>
+            <text x="35" y="84" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">3.0%</text>
+            <text x="35" y="134" fill="#f43f5e" font-size="9" text-anchor="end" font-family="monospace">1.0%</text>
+            <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">0.0%</text>
+            <line x1="40" y1="130" x2="500" y2="130" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4 3"/>
+            <text x="495" y="125" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="end" font-family="monospace">NPCI 1.00% Cap</text>
+            <path d="M 40 164 L 150 163 Q 260 161, 370 161.5 T 490 161" fill="none" stroke="#34d399" stroke-width="2.5"/>
+            <circle cx="490" cy="161" r="4" fill="#34d399"/>
+            <text x="480" y="152" fill="#34d399" font-size="9.5" font-weight="bold" font-family="monospace">0.12% (Normal Festive Variance)</text>
+            <text x="40" y="182" fill="#64748b" font-size="9" font-family="monospace">+0h</text>
+            <text x="150" y="182" fill="#64748b" font-size="9" font-family="monospace">+2h</text>
+            <text x="260" y="182" fill="#64748b" font-size="9" font-family="monospace">+4h</text>
+            <text x="370" y="182" fill="#64748b" font-size="9" font-family="monospace">+8h</text>
+            <text x="490" y="182" fill="#64748b" font-size="9" font-family="monospace">+12h</text>
+          </svg>
+        `;
+      }
+    }
+
+    function buildHistogramSVG(states, values, barColor, badgeText, kaHeight) {
+      const startX = 45;
+      const barWidth = 26;
+      const gap = 12;
+      const baseY = 165;
+      let barsSvg = '';
+
+      states.forEach((st, i) => {
+        const x = startX + i * (barWidth + gap);
+        const val = values[i];
+        // Calculate height: max val 100% => ~135px
+        const h = Math.max(3, (val / 100) * 140);
+        const y = baseY - h;
+        const color = (st === "KA" && barColor === "#34d399") ? "#34d399" : (barColor === "#f43f5e" ? "#f43f5e" : "#64748b");
+
+        barsSvg += `
+          <rect x="${x}" y="${y}" width="${barWidth}" height="${h}" rx="3" fill="${color}" opacity="${st === 'KA' || barColor === '#f43f5e' ? '1' : '0.4'}"/>
+          <text x="${x + barWidth/2}" y="${y - 4}" fill="${color}" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">${val}%</text>
+          <text x="${x + barWidth/2}" y="180" fill="#94a3b8" font-size="9" font-family="monospace" text-anchor="middle">${st}</text>
+        `;
+      });
+
+      return `
+        <svg viewBox="0 0 520 200" class="w-full h-48">
+          <line x1="40" y1="25" x2="505" y2="25" stroke="#1e293b" stroke-dasharray="2 2"/>
+          <line x1="40" y1="95" x2="505" y2="95" stroke="#1e293b" stroke-dasharray="2 2"/>
+          <line x1="40" y1="165" x2="505" y2="165" stroke="#334155"/>
+          <text x="35" y="30" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">100%</text>
+          <text x="35" y="100" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">50%</text>
+          <text x="35" y="168" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">0%</text>
+          ${barsSvg}
+          <text x="500" y="20" fill="${barColor}" font-size="9.5" font-weight="bold" font-family="monospace" text-anchor="end">${badgeText}</text>
+        </svg>
+      `;
+    }
+
+const dataset = {
+      normal: {
+        risk: 12,
+        riskColor: "#34d399",
+        riskClass: "text-emerald-400",
+        borderClass: "border-emerald-500/50",
+        band: "Low Risk: Normal Operations",
+        originTag: "HMAC Valid: dailycrumb.in",
+        originClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+        originNote: "Server-to-server checkout session token authentic.",
+        entropyVal: "H = 0.19",
+        entropyColor: "text-emerald-400",
+        entropyNote: "91% Local Cluster (Indiranagar / BLR)",
+        bars: [{w: 91, c: "#34d399"}, {w: 3, c: "#38bdf8"}, {w: 3, c: "#a78bfa"}, {w: 3, c: "#fbbf24"}],
+        vpaVal: "14% Novel",
+        vpaColor: "text-emerald-400",
+        vpaBar: 14,
+        vpaBarColor: "bg-emerald-400",
+        vpaNote: "86% Repeat local neighborhood accounts",
+        fanoutVal: "1 : 2",
+        fanoutHigh: false,
+        fanoutPct: 10,
+        fanoutNote: "2 Verified B2B Suppliers",
+        disputeVal: "0.03%",
+        disputeHigh: false,
+        disputePct: 5,
+        disputeNote: "Well below NPCI 1.0% Cap",
+        total: "₹25,000",
+        base: "₹25,000",
+        surge: "₹0",
+        basePct: "100%",
+        surgePct: "0%",
+        surgeColor: "#f59e0b",
+        trackBDesc: "No surge volume. Nothing to hold.",
+        trackBBox: "border-slate-700 bg-slate-800/50",
+        trackBTitleClass: "text-slate-400",
+        trackBTitle: "Track B: Surge Liquidity Escrow (48h Quarantine) ₹0",
+        gstnBadge: "STANDBY",
+        gstnNote: "Volume within normal range. No statutory audit friction applied.",
+        canMatch: false,
+        txns: [
+          makeTxn("18:24:12", "₹450", "UPI Intent (GPay)", "KA - @okhdfcbank", "Browser / dailycrumb.in", "T+1 Settled", C_GREEN),
+          makeTxn("18:22:05", "₹1,200", "UPI Intent (PhonePe)", "KA - @ybl", "Browser / dailycrumb.in", "T+1 Settled", C_GREEN),
+          makeTxn("18:20:10", "₹380", "POS Static QR", "KA - @paytm", "In-Store Terminal", "T+1 Settled", C_GREEN),
+          makeTxn("18:15:32", "₹650", "UPI Intent (CRED)", "KA - @axisbank", "Browser / dailycrumb.in", "T+1 Settled", C_GREEN)
+        ],
+        pool: {
+          amts: ["₹450", "₹1,200", "₹380", "₹650", "₹220"],
+          rails: ["UPI Intent (GPay)", "UPI Intent (PhonePe)", "POS Static QR", "UPI Intent (CRED)"],
+          vpas: ["KA - @okhdfcbank", "KA - @ybl", "KA - @paytm", "KA - @axisbank"],
+          origins: ["Browser / dailycrumb.in", "Browser / dailycrumb.in", "In-Store Terminal"],
+          act: "T+1 Settled",
+          badge: C_GREEN
+        },
+        interval: 2400
+      },
+      attack: {
+        risk: 91,
+        riskColor: "#f43f5e",
+        riskClass: "text-rose-500",
+        borderClass: "border-rose-500/50",
+        band: "CRITICAL: Multi-Vector Betting Ring Flagged",
+        originTag: "ALERT: t.me/bet_bot · aviator99.club (APK)",
+        originClass: "bg-rose-500/20 text-rose-400 border-rose-500/40",
+        originNote: "HMAC Token Missing: Checkout loaded in Telegram Bot & Sideloaded Crash APK WebViews.",
+        entropyVal: "H = 0.96",
+        entropyColor: "text-rose-500",
+        entropyNote: "Dispersed across 19 States (Sportsbooks, Crash APKs & Offshore Casinos)",
+        bars: Array.from({length: 19}, (_, i) => ({w: 5.2, c: ['#34d399','#38bdf8','#a78bfa','#fbbf24','#f472b6','#fb923c','#2dd4bf','#818cf8','#f87171','#a3e635'][i%10]})),
+        vpaVal: "98% Novel",
+        vpaColor: "text-rose-500",
+        vpaBar: 98,
+        vpaBarColor: "bg-rose-500",
+        vpaNote: "First-time throwaway VPAs nationwide; zero repeat local footfall",
+        fanoutVal: "1 : 214",
+        fanoutHigh: true,
+        fanoutPct: 96,
+        fanoutNote: "214 Instant Bettor / Casino Micro-Payouts",
+        disputeVal: "4.82%",
+        disputeHigh: true,
+        disputePct: 92,
+        disputeNote: "CRITICAL: Gambler chargeback wave",
+        total: "₹4,25,000",
+        base: "₹25,000",
+        surge: "₹4,00,000",
+        basePct: "6%",
+        surgePct: "94%",
+        surgeColor: "#f43f5e",
+        trackBDesc: "48h Quarantine. Chokes sportsbook, crash-game & casino withdrawal payouts.",
+        trackBBox: "border-rose-500/40 bg-rose-500/10",
+        trackBTitleClass: "text-rose-300",
+        trackBTitle: "Track B: Surge Liquidity Escrow (48h Quarantine) ₹4,00,000",
+        gstnBadge: "AUDIT REQUIRED",
+        gstnNote: "Midnight syndicate surge (Sportsbook / Aviator APK / Casino). Run GSTN check to audit Input Tax.",
+        canMatch: true,
+        txns: [
+          makeTxn("23:42:10", "₹501", "UPI Dynamic Intent", "NL (Dimapur) - @fam", "aviator99.club (Crash APK)", "Escrow Hold", C_RED),
+          makeTxn("23:42:08", "₹2,100", "UPI Intent (Paytm)", "MH (Nagpur) - @paytm", "t.me/betwin_sports_bot", "Escrow Hold", C_RED),
+          makeTxn("23:42:01", "₹420", "UPI Intent (GPay)", "KA (BLR) - @okhdfcbank", "Browser / dailycrumb.in", "T+1 Settled", C_GREEN),
+          makeTxn("23:41:59", "₹1,000", "UPI Intent (PhonePe)", "RJ (Jaipur) - @ybl", "royalroulette.io (WebView)", "Escrow Hold", C_RED),
+          makeTxn("23:41:45", "₹750", "UPI Dynamic Intent", "UP (Meerut) - @okaxis", "91club-color.apk", "Escrow Hold", C_RED)
+        ],
+        pool: {
+          amts: ["₹501", "₹2,100", "₹1,000", "₹750", "₹5,000", "₹1,500"],
+          rails: ["UPI Dynamic Intent", "UPI Intent (Paytm)", "UPI Intent (PhonePe)"],
+          vpas: ["NL (Dimapur) - @fam", "MH (Nagpur) - @paytm", "RJ (Jaipur) - @ybl", "UP (Meerut) - @okaxis", "AS (Guwahati) - @oksbi", "BR (Patna) - @ybl"],
+          origins: ["aviator99.club (Crash APK)", "t.me/betwin_sports_bot", "royalroulette.io (WebView)", "91club-color.apk"],
+          act: "Escrow Hold",
+          badge: C_RED,
+          mix: 0.2
+        },
+        interval: 800
+      },
+      festive: {
+        risk: 34,
+        riskColor: "#fbbf24",
+        riskClass: "text-amber-400",
+        borderClass: "border-amber-500/50",
+        band: "Low Risk: Seasonally Cleared Surge",
+        originTag: "HMAC Valid: dailycrumb.in + Swiggy POS",
+        originClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+        originNote: "Authorized multichannel retail endpoints validated.",
+        entropyVal: "H = 0.31",
+        entropyColor: "text-emerald-400",
+        entropyNote: "94% Metro Cluster (Festival Pre-orders)",
+        bars: [{w: 94, c: "#34d399"}, {w: 3, c: "#38bdf8"}, {w: 2, c: "#a78bfa"}, {w: 1, c: "#fbbf24"}],
+        vpaVal: "38% Novel",
+        vpaColor: "text-emerald-400",
+        vpaBar: 38,
+        vpaBarColor: "bg-emerald-400",
+        vpaNote: "High proportion of known local gift buyers",
+        fanoutVal: "1 : 4",
+        fanoutHigh: false,
+        fanoutPct: 18,
+        fanoutNote: "4 Verified Dairy/Flour Mills",
+        disputeVal: "0.12%",
+        disputeHigh: false,
+        disputePct: 12,
+        disputeNote: "Normal Festive Retail Variance",
+        total: "₹1,85,000",
+        base: "₹25,000",
+        surge: "₹1,60,000",
+        basePct: "14%",
+        surgePct: "86%",
+        surgeColor: "#fbbf24",
+        trackBDesc: "Surge held pending automated GSTN e-Invoice validation.",
+        trackBBox: "border-amber-500/40 bg-amber-500/10",
+        trackBTitleClass: "text-amber-300",
+        trackBTitle: "Track B: Surge Liquidity Escrow (48h Quarantine) ₹1,60,000",
+        gstnBadge: "E-WAY BILL READY",
+        gstnNote: "Festive surge detected. Run GSTN check to automatically clear escrow via B2B e-Invoices.",
+        canMatch: true,
+        txns: [
+          makeTxn("21:10:45", "₹3,500", "UPI Intent (GPay)", "KA (BLR) - @okhdfcbank", "dailycrumb.in/diwali", "Pending Verify", C_AMBER),
+          makeTxn("21:10:12", "₹380", "POS Static QR", "KA (BLR) - @paytm", "In-Store Terminal", "T+1 Settled", C_GREEN),
+          makeTxn("21:09:12", "₹4,800", "Store Counter POS", "KA (BLR) - Card", "POS Terminal #1", "Pending Verify", C_AMBER),
+          makeTxn("21:07:30", "₹520", "UPI Intent (GPay)", "KA (BLR) - @axisbank", "dailycrumb.in", "T+1 Settled", C_GREEN),
+          makeTxn("21:05:30", "₹2,200", "UPI Intent (PhonePe)", "KA (BLR) - @ybl", "Swiggy POS Bridge", "Pending Verify", C_AMBER)
+        ],
+        pool: {
+          amts: ["₹3,500", "₹4,800", "₹2,200", "₹1,850"],
+          rails: ["UPI Intent (GPay)", "Store Counter POS", "UPI Intent (PhonePe)"],
+          vpas: ["KA (BLR) - @okhdfcbank", "KA (BLR) - Card", "KA (BLR) - @ybl"],
+          origins: ["dailycrumb.in/diwali", "POS Terminal #1", "Swiggy POS Bridge"],
+          act: "Pending Verify",
+          badge: C_AMBER,
+          alt: {
+            p: 0.5,
+            amts: ["₹380", "₹520", "₹450", "₹290"],
+            rails: ["POS Static QR", "UPI Intent (GPay)"],
+            vpas: ["KA (BLR) - @paytm", "KA (BLR) - @axisbank"],
+            origins: ["In-Store Terminal", "dailycrumb.in"]
+          }
+        },
+        interval: 1500
+      }
+    };
+
+        let current = 'normal';
+    let liveTxns = [];
+    let streamTimer = null;
+    let resumeStreamTimeout = null;
+    let clock = "18:24:12";
+
+    // Live interactive state counters
+    let currentBaseNum = 25000;
+    let currentSurgeNum = 0;
+    let injectedGenuineSum = 0;
+    let injectedBetSum = 0;
+    let injectedBetCount = 0;
+    let currentFanoutCount = 2;
+
+    function formatINR(num) {
+      return "₹" + Number(num).toLocaleString('en-IN');
+    }
+
+    function parseINR(str) {
+      return Number(String(str).replace(/[^0-9]/g, '')) || 0;
+    }
+
+    function stepTime(tStr, stepSec) {
+      let [h, m, s] = tStr.split(':').map(Number);
+      s += stepSec;
+      m += Math.floor(s / 60);
+      s %= 60;
+      h = (h + Math.floor(m / 60)) % 24;
+      m %= 60;
+      return [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
+    }
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateNextTxn(scKey) {
+      const p = dataset[scKey].pool;
+      clock = stepTime(clock, scKey === 'attack' ? 1 : 3);
+      if (p.alt && Math.random() < p.alt.p) {
+        return makeTxn(clock, pickRandom(p.alt.amts), pickRandom(p.alt.rails), pickRandom(p.alt.vpas), pickRandom(p.alt.origins), "T+1 Settled", C_GREEN);
+      }
+      if (p.mix && Math.random() < p.mix) {
+        return makeTxn(clock, pickRandom(["₹420", "₹380", "₹650", "₹290"]), pickRandom(["UPI Intent (GPay)", "UPI Intent (PhonePe)"]), pickRandom(["KA (BLR) - @okhdfcbank", "KA (BLR) - @ybl"]), "Browser / dailycrumb.in", "T+1 Settled", C_GREEN);
+      }
+      return makeTxn(clock, pickRandom(p.amts), pickRandom(p.rails), pickRandom(p.vpas), pickRandom(p.origins), p.act, p.badge);
+    }
+
+    function renderTableRows(txns, isFirstRowin = false) {
+      const tbody = document.getElementById('txn-tbody');
+      tbody.innerHTML = '';
+      txns.forEach((tx, idx) => {
+        const tr = document.createElement('tr');
+        let rowClass = `border-t border-slate-800 ${idx === 0 && isFirstRowin ? 'rowin' : ''}`;
+        if (tx.userType === 'genuine') {
+          rowClass = "border-t border-emerald-500/40 rowin-user-green";
+        } else if (tx.userType === 'bet') {
+          rowClass = "border-t border-rose-500/40 rowin-user-red";
+        }
+        tr.className = rowClass;
+
+        const isSuspicious = /bet|Telegram|aviator|roulette|apk|club/i.test(tx.origin);
+        const userTag = tx.userType === 'genuine'
+          ? '<span class="ml-1.5 px-1.5 py-0.5 rounded bg-emerald-500 text-slate-950 text-[10px] font-bold">★ YOU (Bakery)</span>'
+          : tx.userType === 'bet'
+          ? '<span class="ml-1.5 px-1.5 py-0.5 rounded bg-rose-500 text-white text-[10px] font-bold">★ YOU (Bet)</span>'
+          : '';
+
+        tr.innerHTML = `
+          <td class="px-4 py-2 font-mono text-slate-400">${tx.t}</td>
+          <td class="px-4 py-2 font-mono font-semibold text-white">${tx.amt}${userTag}</td>
+          <td class="px-4 py-2 font-mono text-slate-300">${tx.rail}</td>
+          <td class="px-4 py-2 font-mono">${tx.vpa}</td>
+          <td class="px-4 py-2 font-mono ${isSuspicious ? 'text-rose-400 font-bold' : 'text-slate-300'}">${tx.origin}</td>
+          <td class="px-4 py-2"><span class="px-2 py-0.5 rounded text-[11px] font-semibold whitespace-nowrap ${tx.badge}">${tx.act}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function startAutoStream() {
+      if (streamTimer) clearInterval(streamTimer);
+      const d = dataset[current];
+      const pill = document.getElementById('stream-status-pill');
+      if (pill) {
+        pill.innerText = "Stream: AUTO";
+        pill.className = "text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700";
+      }
+      streamTimer = setInterval(() => {
+        const newTx = generateNextTxn(current);
+        liveTxns = [newTx, ...liveTxns.slice(0, 5)];
+        renderTableRows(liveTxns, true);
+      }, d.interval);
+    }
+
+    function pauseStreamTemporarily(seconds = 9) {
+      if (streamTimer) clearInterval(streamTimer);
+      if (resumeStreamTimeout) clearTimeout(resumeStreamTimeout);
+      const pill = document.getElementById('stream-status-pill');
+      if (pill) {
+        pill.innerText = `⏸ Stream Paused (${seconds}s — Inspecting Your Txn)`;
+        pill.className = "text-[11px] font-mono px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/40 font-bold";
+      }
+      resumeStreamTimeout = setTimeout(() => {
+        startAutoStream();
+      }, seconds * 1000);
+    }
+
+    function updateReserveVisuals() {
+      const totalNum = currentBaseNum + currentSurgeNum;
+      const basePct = totalNum > 0 ? Math.max(6, Math.round((currentBaseNum / totalNum) * 100)) : 100;
+      const surgePct = 100 - basePct;
+
+      document.getElementById('total-vol').innerText = formatINR(totalNum);
+      const bBase = document.getElementById('bar-base');
+      bBase.style.width = basePct + "%";
+      bBase.innerText = formatINR(currentBaseNum);
+
+      const bSurge = document.getElementById('bar-surge');
+      bSurge.style.width = surgePct + "%";
+      bSurge.innerText = formatINR(currentSurgeNum);
+
+      // Update Track A Title
+      const trackATitle = document.getElementById('track-a-title');
+      if (trackATitle) {
+        const extraGenuineNote = injectedGenuineSum > 0 ? ` (+${formatINR(injectedGenuineSum)} Live Customer Order)` : "";
+        trackATitle.innerText = `Track A: Base Working Capital (T+1 Cleared via EMA ± 2σ) ${formatINR(currentBaseNum)}${extraGenuineNote}`;
+      }
+
+      // Update Track B Title & Box
+      const tBBox = document.getElementById('track-b-box');
+      const tBTitle = document.getElementById('track-b-title');
+      const tBDesc = document.getElementById('track-b-desc');
+
+      if (currentSurgeNum === 0) {
+        tBBox.className = "rounded-lg border p-3 border-slate-700 bg-slate-800/50 transition-all duration-300";
+        tBTitle.className = "font-bold text-slate-400";
+        tBTitle.innerText = "Track B: Surge Liquidity Escrow (48h Quarantine) ₹0";
+        tBDesc.innerText = "No surge volume. Nothing to hold.";
+      } else if (injectedBetCount > 0 || current === 'attack') {
+        bSurge.style.backgroundColor = "#f43f5e";
+        tBBox.className = "rounded-lg border p-3 border-rose-500/50 bg-rose-500/10 transition-all duration-300";
+        tBTitle.className = "font-bold text-rose-300";
+        const extraBetNote = injectedBetSum > 0 ? ` (Includes +${formatINR(injectedBetSum)} Live Masked Bet)` : "";
+        tBTitle.innerText = `Track B: Surge Liquidity Escrow (48h Quarantine) ${formatINR(currentSurgeNum)}${extraBetNote}`;
+        tBDesc.innerText = "48h Quarantine Active! Baker's Track A capital stays safe while syndicate betting surge is locked.";
+      } else {
+        bSurge.style.backgroundColor = "#fbbf24";
+        tBBox.className = "rounded-lg border p-3 border-amber-500/40 bg-amber-500/10 transition-all duration-300";
+        tBTitle.className = "font-bold text-amber-300";
+        tBTitle.innerText = `Track B: Surge Liquidity Escrow (48h Quarantine) ${formatINR(currentSurgeNum)}`;
+        tBDesc.innerText = "Surge held pending automated GSTN e-Invoice validation.";
+      }
+
+      // Sync Tab 2 Model 1 numbers if user switches to Tab 2
+      const g1D30 = document.getElementById('g1-val-d30');
+      const g1Escrow = document.getElementById('g1-val-escrow');
+      if (g1D30) g1D30.innerText = formatINR(totalNum);
+      if (g1Escrow) {
+        g1Escrow.innerText = currentSurgeNum > 0 ? `${formatINR(currentSurgeNum)} (Locked)` : "₹0 (100% Cleared)";
+        g1Escrow.className = currentSurgeNum > 0 ? "text-rose-400 font-bold" : "text-emerald-400 font-bold";
+      }
+    }
+
+    function simulateUserCheckout(mode, amount, origin, vpa, rail) {
+      const amtNum = Math.max(1, Number(amount) || 500);
+      const amtFormatted = formatINR(amtNum);
+      clock = stepTime(clock, 2);
+
+      // Pause random stream for 9 seconds so user's injected row stays at top of table
+      pauseStreamTemporarily(9);
+
+      const traceSteps = document.getElementById('trace-steps');
+      const traceLatency = document.getElementById('trace-latency');
+
+      if (mode === 'genuine') {
+        injectedGenuineSum += amtNum;
+        currentBaseNum += amtNum;
+        updateReserveVisuals();
+
+        // Pulse Track A box green
+        const tABox = document.getElementById('track-a-box');
+        tABox.classList.remove('pulse-box-green');
+        void tABox.offsetWidth;
+        tABox.classList.add('pulse-box-green');
+
+        // Update Pipeline Trace
+        traceLatency.innerText = "Sync Handshake: 10.4ms (200 OK)";
+        traceLatency.className = "text-emerald-400 font-bold";
+        traceSteps.className = "text-xs font-mono text-emerald-200 bg-emerald-500/10 border border-emerald-500/40 rounded-lg px-3 py-2 flex flex-wrap items-center gap-2";
+        traceSteps.innerHTML = `
+          <span class="bg-emerald-500 text-slate-950 font-bold px-2 py-0.5 rounded">✔ GENUINE ORDER (${amtFormatted})</span>
+          <span>1. HMAC Signed (${origin})</span>
+          <span>➔</span>
+          <span>2. Local BLR Pincode (H=0.19)</span>
+          <span>➔</span>
+          <span class="font-bold text-emerald-300">3. Routed to Track A (+${amtFormatted} T+1 Settled to Baker)</span>
+        `;
+
+        // Prepend to Live Table
+        const userTx = {
+          id: Math.random(),
+          t: clock,
+          amt: amtFormatted,
+          rail: rail,
+          vpa: vpa,
+          origin: origin + " (HMAC ✔)",
+          act: "T+1 Settled (Track A)",
+          badge: C_GREEN,
+          userType: 'genuine'
+        };
+        liveTxns = [userTx, ...liveTxns.slice(0, 5)];
+        renderTableRows(liveTxns, false);
+
+      } else {
+        // Masked Betting Injection
+        injectedBetSum += amtNum;
+        injectedBetCount += 1;
+        currentSurgeNum += amtNum;
+        currentFanoutCount = Math.max(currentFanoutCount, 214) + injectedBetCount;
+        updateReserveVisuals();
+
+        // Pulse Track B box & Risk card red
+        const tBBox = document.getElementById('track-b-box');
+        tBBox.classList.remove('pulse-box-red');
+        void tBBox.offsetWidth;
+        tBBox.classList.add('pulse-box-red');
+
+        const rCard = document.getElementById('card-risk');
+        rCard.classList.remove('pulse-box-red');
+        void rCard.offsetWidth;
+        rCard.classList.add('pulse-box-red');
+
+        // Elevate Risk Score & Origin Alert dynamically even if starting from Baseline
+        const newRisk = current === 'attack' ? Math.min(99, 91 + injectedBetCount * 2) : Math.min(96, 82 + injectedBetCount * 4);
+        const c = 2 * Math.PI * 42;
+        const circle = document.getElementById('gauge-circle');
+        circle.style.strokeDashoffset = c * (1 - newRisk / 100);
+        circle.style.stroke = "#f43f5e";
+        rCard.className = "rounded-xl border border-rose-500/60 bg-slate-900 p-4 flex items-center gap-4 pulse-box-red";
+
+        const scoreElem = document.getElementById('risk-score');
+        scoreElem.className = "text-4xl font-black text-rose-500";
+        scoreElem.innerHTML = `${newRisk}<span class="text-lg text-slate-500 font-normal"> / 100</span>`;
+        const bandElem = document.getElementById('risk-band');
+        bandElem.className = "text-sm font-semibold text-rose-400";
+        bandElem.innerText = "CRITICAL: Masked Bet Intercepted on Bakery MID";
+
+        // Update Card 2 Origin Check to reflect the injected betting container
+        const oCard = document.getElementById('card-origin');
+        oCard.className = "rounded-xl border border-rose-500/50 bg-rose-500/5 bg-slate-900 p-4 flex flex-col justify-between";
+        const oBadge = document.getElementById('origin-badge');
+        oBadge.className = "inline-block text-[11px] font-mono font-bold px-2 py-1 rounded border bg-rose-500/20 text-rose-400 border-rose-500/40";
+        document.getElementById('origin-icon').innerText = '⚠';
+        document.getElementById('origin-text').innerText = `ALERT: ${origin}`;
+        document.getElementById('origin-note').innerText = `HMAC Session Token Missing: ${amtFormatted} bet injected via unregistered WebView.`;
+
+        // Update Card 5 Payout Fan-Out
+        const fCard = document.getElementById('card-fanout');
+        fCard.className = "rounded-xl border border-rose-500/50 bg-rose-500/5 bg-slate-900 p-4 flex flex-col justify-between";
+        const fVal = document.getElementById('fanout-val');
+        fVal.innerText = `1 : ${currentFanoutCount}`;
+        fVal.className = "text-3xl font-black font-mono text-rose-500";
+        document.getElementById('fanout-note').innerText = `${currentFanoutCount} Outbound Bettor/Casino Micro-Payouts`;
+        const fBar = document.getElementById('fanout-bar');
+        fBar.style.width = "96%";
+        fBar.className = "bg-rose-500 transition-all duration-500";
+
+        // Enable GSTN Audit button so user can test statutory audit failure on the injected bet
+        document.getElementById('gstn-badge').innerText = "AUDIT REQUIRED";
+        document.getElementById('gstn-badge').className = "bg-rose-500/20 text-rose-300 text-[10px] font-mono px-2 py-0.5 rounded border border-rose-500/30";
+        document.getElementById('gstn-note').innerText = `Unverified ${amtFormatted} betting surge quarantined. Run GSTN check to audit Input Tax.`;
+        const btnG = document.getElementById('btn-gstn-action');
+        btnG.disabled = false;
+        btnG.className = "flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold py-3 px-4 transition cursor-pointer";
+
+        // Update Pipeline Trace
+        traceLatency.innerText = "In-Line Trap: 11.8ms (Quarantined)";
+        traceLatency.className = "text-rose-400 font-bold";
+        traceSteps.className = "text-xs font-mono text-rose-200 bg-rose-500/10 border border-rose-500/40 rounded-lg px-3 py-2 flex flex-wrap items-center gap-2";
+        traceSteps.innerHTML = `
+          <span class="bg-rose-500 text-white font-bold px-2 py-0.5 rounded">⚠ MASKED BET (${amtFormatted})</span>
+          <span>1. No HMAC (${origin})</span>
+          <span>➔</span>
+          <span>2. Novel VPA (${vpa})</span>
+          <span>➔</span>
+          <span class="font-bold text-rose-300">3. Locked in Track B 48h Escrow (+${amtFormatted} Quarantined · Baker's Track A Untouched)</span>
+        `;
+
+        // Prepend to Live Table
+        const betTx = {
+          id: Math.random(),
+          t: clock,
+          amt: amtFormatted,
+          rail: rail,
+          vpa: vpa,
+          origin: origin + " (No HMAC ⚠)",
+          act: "Escrow Hold (48h)",
+          badge: C_RED,
+          userType: 'bet'
+        };
+        liveTxns = [betTx, ...liveTxns.slice(0, 5)];
+        renderTableRows(liveTxns, false);
+      }
+    }
+
+    function triggerCustomCheckout() {
+      const amtInput = document.getElementById('custom-amt-input');
+      const channelSelect = document.getElementById('custom-channel-select');
+      const amt = Number(amtInput.value) || 2500;
+      const ch = channelSelect.value;
+
+      if (ch === 'genuine_web') {
+        simulateUserCheckout('genuine', amt, 'Browser / dailycrumb.in', 'KA (BLR) - @okhdfcbank', 'UPI Intent (PhonePe)');
+      } else if (ch === 'bet_apk') {
+        simulateUserCheckout('bet', amt, 'aviator99.club (Crash APK)', 'RJ (Jaipur) - @ybl', 'UPI Dynamic Intent');
+      } else if (ch === 'bet_tg') {
+        simulateUserCheckout('bet', amt, 't.me/betwin_sports_bot', 'UP (Meerut) - @okaxis', 'UPI Intent (Paytm)');
+      } else {
+        simulateUserCheckout('bet', amt, 'royalroulette.io (WebView)', 'NL (Dimapur) - @fam', 'UPI Dynamic Intent');
+      }
+    }
+
+    function resetSandboxCounters() {
+      setScenario(current);
+      const traceSteps = document.getElementById('trace-steps');
+      const traceLatency = document.getElementById('trace-latency');
+      if (traceLatency) {
+        traceLatency.innerText = "Sync Handshake: 11.2ms";
+        traceLatency.className = "text-sky-400";
+      }
+      if (traceSteps) {
+        traceSteps.className = "text-xs font-mono text-slate-300 bg-slate-900/90 border border-slate-800 rounded-lg px-3 py-2 flex flex-wrap items-center gap-2";
+        traceSteps.innerHTML = `<span class="text-slate-400">Counters reset to scenario baseline. Click <strong class="text-emerald-400">Pay ₹500</strong> or <strong class="text-rose-400">Bet ₹1,500</strong> above to test live routing...</span>`;
+      }
+    }
+
+    function setScenario(sc) {
+      current = sc;
+      const d = dataset[sc];
+      clock = d.txns[0].t;
+      liveTxns = d.txns.map(t => ({...t}));
+
+      // Reset interactive counters to scenario baseline
+      currentBaseNum = parseINR(d.base);
+      currentSurgeNum = parseINR(d.surge);
+      injectedGenuineSum = 0;
+      injectedBetSum = 0;
+      injectedBetCount = 0;
+      currentFanoutCount = sc === 'attack' ? 214 : sc === 'festive' ? 4 : 2;
+
+      if (resumeStreamTimeout) clearTimeout(resumeStreamTimeout);
+      startAutoStream();
+
+      // Buttons styling
+      const iconColors = { normal: 'text-emerald-400', attack: 'text-rose-500', festive: 'text-amber-400' };
+      ['normal', 'attack', 'festive'].forEach(k => {
+        const btn = document.getElementById('btn-' + k);
+        const icon = document.getElementById('icon-' + k);
+        const title = document.getElementById('title-' + k);
+        if (k === sc) {
+          btn.className = `text-left rounded-xl border-2 p-4 transition focus:outline-none ${d.borderClass} ${d.riskColor === '#f43f5e' ? 'bg-rose-500/10' : d.riskColor === '#fbbf24' ? 'bg-amber-500/10' : 'bg-emerald-500/10'}`;
+          if (icon) icon.setAttribute('class', 'w-6 h-6 ' + iconColors[k]);
+          if (title) title.className = 'font-bold text-white text-sm';
+        } else {
+          btn.className = "text-left rounded-xl border-2 p-4 transition focus:outline-none border-slate-800 bg-slate-900 hover:border-slate-600";
+          if (icon) icon.setAttribute('class', 'w-6 h-6 text-slate-500');
+          if (title) title.className = 'font-bold text-slate-300 text-sm';
+        }
+      });
+
+      // Card 1: Risk Gauge
+      const rCard = document.getElementById('card-risk');
+      rCard.className = `rounded-xl border ${d.borderClass} bg-slate-900 p-4 flex items-center gap-4`;
+      const c = 2 * Math.PI * 42; // 263.89
+      const offset = c * (1 - d.risk / 100);
+      const circle = document.getElementById('gauge-circle');
+      circle.style.strokeDashoffset = offset;
+      circle.style.stroke = d.riskColor;
+      const scoreElem = document.getElementById('risk-score');
+      scoreElem.className = "text-4xl font-black " + d.riskClass;
+      scoreElem.innerHTML = `${d.risk}<span class="text-lg text-slate-500 font-normal"> / 100</span>`;
+      const bandElem = document.getElementById('risk-band');
+      bandElem.innerText = d.band;
+      bandElem.className = "text-sm font-semibold " + d.riskClass;
+
+      // Card 2: Origin
+      const oCard = document.getElementById('card-origin');
+      oCard.className = `rounded-xl border ${sc === 'attack' ? 'border-rose-500/50 bg-rose-500/5' : 'border-slate-800'} bg-slate-900 p-4 flex flex-col justify-between`;
+      const oBadge = document.getElementById('origin-badge');
+      oBadge.className = `inline-block text-[11px] font-mono font-bold px-2 py-1 rounded border ${d.originClass}`;
+      document.getElementById('origin-icon').innerText = sc === 'attack' ? '⚠' : '✔';
+      document.getElementById('origin-text').innerText = d.originTag;
+      document.getElementById('origin-note').innerText = d.originNote;
+
+      // Card 3: Entropy
+      const eVal = document.getElementById('entropy-val');
+      eVal.innerText = d.entropyVal;
+      eVal.className = "text-3xl font-black font-mono " + d.entropyColor;
+      document.getElementById('entropy-note').innerText = d.entropyNote;
+      const eBars = document.getElementById('entropy-bars');
+      eBars.innerHTML = d.bars.map(b => `<div style="width: ${b.w}%; background: ${b.c}; transition: width 0.6s;"></div>`).join('');
+
+      // Card 4: VPA Novelty
+      const vVal = document.getElementById('vpa-val');
+      vVal.innerText = d.vpaVal;
+      vVal.className = "text-3xl font-black font-mono " + d.vpaColor;
+      document.getElementById('vpa-note').innerText = d.vpaNote;
+      const vBar = document.getElementById('vpa-bar');
+      vBar.style.width = d.vpaBar + '%';
+      vBar.className = d.vpaBarColor + " transition-all duration-500";
+
+      // Card 5: Payout Fanout
+      const fCard = document.getElementById('card-fanout');
+      fCard.className = `rounded-xl border ${d.fanoutHigh ? 'border-rose-500/50 bg-rose-500/5' : 'border-slate-800'} bg-slate-900 p-4 flex flex-col justify-between`;
+      const fVal = document.getElementById('fanout-val');
+      fVal.innerText = d.fanoutVal;
+      fVal.className = `text-3xl font-black font-mono ${d.fanoutHigh ? 'text-rose-500' : 'text-emerald-400'}`;
+      document.getElementById('fanout-note').innerText = d.fanoutNote;
+      const fBar = document.getElementById('fanout-bar');
+      fBar.style.width = d.fanoutPct + '%';
+      fBar.className = `${d.fanoutHigh ? 'bg-rose-500' : 'bg-emerald-400'} transition-all duration-500`;
+
+      // Card 6: Dispute Velocity
+      const dpCard = document.getElementById('card-dispute');
+      dpCard.className = `rounded-xl border ${d.disputeHigh ? 'border-rose-500/50 bg-rose-500/5' : 'border-slate-800'} bg-slate-900 p-4 flex flex-col justify-between`;
+      const dpVal = document.getElementById('dispute-val');
+      dpVal.innerText = d.disputeVal;
+      dpVal.className = `text-3xl font-black font-mono ${d.disputeHigh ? 'text-rose-500' : 'text-emerald-400'}`;
+      document.getElementById('dispute-note').innerText = d.disputeNote;
+      const dpBar = document.getElementById('dispute-bar');
+      dpBar.style.width = d.disputePct + '%';
+      dpBar.className = `${d.disputeHigh ? 'bg-rose-500' : 'bg-emerald-400'} transition-all duration-500`;
+
+      // Reserve & Tracks
+      document.getElementById('total-vol').innerText = d.total;
+      const bBase = document.getElementById('bar-base');
+      bBase.style.width = d.basePct;
+      bBase.innerText = d.base;
+      const bSurge = document.getElementById('bar-surge');
+      bSurge.style.width = d.surgePct;
+      bSurge.innerText = d.surge;
+      bSurge.style.backgroundColor = d.surgeColor;
+
+      const tATitle = document.getElementById('track-a-title');
+      if (tATitle) tATitle.innerText = "Track A: Base Working Capital (T+1 Cleared via EMA ± 2σ) ₹25,000";
+
+      const tBBox = document.getElementById('track-b-box');
+      tBBox.className = "rounded-lg border p-3 " + d.trackBBox;
+      const tBTitle = document.getElementById('track-b-title');
+      tBTitle.className = "font-bold " + d.trackBTitleClass;
+      tBTitle.innerText = d.trackBTitle;
+      document.getElementById('track-b-desc').innerText = d.trackBDesc;
+
+      // GSTN Console
+      document.getElementById('gstn-badge').innerText = d.gstnBadge;
+      document.getElementById('gstn-badge').className = sc === 'attack'
+        ? "bg-rose-500/20 text-rose-300 text-[10px] font-mono px-2 py-0.5 rounded border border-rose-500/30"
+        : sc === 'festive'
+        ? "bg-amber-500/20 text-amber-300 text-[10px] font-mono px-2 py-0.5 rounded border border-amber-500/30"
+        : "bg-slate-800 text-slate-400 text-[10px] font-mono px-2 py-0.5 rounded";
+      document.getElementById('gstn-note').innerText = d.gstnNote;
+      const btnG = document.getElementById('btn-gstn-action');
+      btnG.disabled = !d.canMatch;
+      btnG.className = d.canMatch 
+        ? "flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold py-3 px-4 transition cursor-pointer"
+        : "flex items-center justify-center gap-2 rounded-lg bg-slate-800 text-slate-500 font-bold py-3 px-4 transition border border-slate-700 cursor-not-allowed";
+
+      // Reset alert boxes
+      document.getElementById('gstn-success-box').classList.add('hidden');
+      document.getElementById('gstn-fail-box').classList.add('hidden');
+
+      renderTableRows(liveTxns, false);
+      renderAnalyticsCharts(sc);
+    }
+
+    function triggerGSTNMatch() {
+      const btn = document.getElementById('btn-gstn-action');
+      const label = document.getElementById('btn-gstn-label');
+      btn.disabled = true;
+      label.innerText = "Matching IRN with GSTN e-invoice portal...";
+
+      setTimeout(() => {
+        btn.disabled = false;
+        label.innerText = "Run Real-Time GSTN Match";
+
+        if (current === 'festive' && injectedBetCount === 0) {
+          document.getElementById('gstn-badge').innerText = "MATCHED";
+          document.getElementById('gstn-badge').className = "bg-emerald-500/20 text-emerald-300 text-[10px] font-mono px-2 py-0.5 rounded";
+          document.getElementById('gstn-success-box').classList.remove('hidden');
+          document.getElementById('gstn-fail-box').classList.add('hidden');
+
+          // Release Escrow
+          currentBaseNum += currentSurgeNum;
+          currentSurgeNum = 0;
+          document.getElementById('bar-base').style.width = "100%";
+          document.getElementById('bar-Base');
+          document.getElementById('bar-base').innerText = formatINR(currentBaseNum);
+          document.getElementById('bar-surge').style.width = "0%";
+          document.getElementById('bar-surge').innerText = "₹0";
+          document.getElementById('track-b-title').innerText = "Track B: Surge Liquidity Escrow (48h Quarantine) ₹0 (Cleared)";
+          document.getElementById('track-b-title').className = "font-bold text-emerald-300";
+          document.getElementById('track-b-box').className = "rounded-lg border p-3 border-emerald-500/40 bg-emerald-500/10";
+          document.getElementById('track-b-desc').innerText = "Escrow released to Bakery Bank A/C via GSTN IRN clearance.";
+
+          // Update pending verify rows to Settled
+          liveTxns = liveTxns.map(t => ({
+            ...t,
+            act: t.act === "Pending Verify" ? "Escrow Released" : t.act,
+            badge: t.act === "Pending Verify" ? C_GREEN : t.badge
+          }));
+          renderTableRows(liveTxns, false);
+
+        } else {
+          document.getElementById('gstn-badge').innerText = "AUDIT FAILED";
+          document.getElementById('gstn-badge').className = "bg-rose-500/20 text-rose-300 text-[10px] font-mono px-2 py-0.5 rounded";
+          document.getElementById('gstn-fail-box').classList.remove('hidden');
+          document.getElementById('gstn-success-box').classList.add('hidden');
+
+          document.getElementById('track-b-desc').innerText = "Frozen. Syndicate working capital cannot be withdrawn.";
+          document.getElementById('track-b-box').className = "rounded-lg border p-3 border-rose-500/40 bg-rose-500/10";
+        }
+      }, 1200);
+    }
+
+    // Default Init
+    setScenario('normal');
+  </script>
+</body>
+</html>
